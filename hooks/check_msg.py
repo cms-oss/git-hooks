@@ -56,11 +56,8 @@ def main():
         validate_commit(message, get_branch_name())
         print("Message validated")
         sys.exit(0)
-    except TypeError as e:
-        print(e.args[1], file=sys.stderr)
-        sys.exit(1)
     except Exception as e:
-        print(e.args[0], file=sys.stderr)
+        print(e.args[-1], file=sys.stderr)
         sys.exit(1)
 
 
