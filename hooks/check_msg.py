@@ -29,22 +29,22 @@ def extract_ref(value: str, regex: str) -> str | None:
 def validate_commit(message: str, branch: str) -> None:
     if branch in BRANCH_EXCEPTIONS:
         raise TypeError(f"""
-            WARNING: You might not have permissions to push to `{branch}`. Use `git reset HEAD~` to undo this commit, 
-            create a proper branch and/or commit message and commit the changes again. 
+            \033[93mWARNING: You might not have permissions to push to `{branch}`. Use `git reset HEAD~` to undo this commit, 
+            create a proper branch and/or commit message and commit the changes again.\033[0m
         """)
 
     if not re.match(REGEX_BRANCH, branch):
         raise TypeError(f"""
-                           ERROR: Invalid branch name:
-                           \tIt should match {REGEX_BRANCH}
-                           \tExample: feat/#12-git-hooks
+    \033[91mERROR: Invalid branch name:
+    It should match \033[4m{REGEX_BRANCH}\033[0m\033[91m
+    Example: \033[4mfeat/#12-git-hooks\033[0m
                         """)
 
     if not re.match(REGEX_MESSAGE, message):
         raise TypeError(f"""
-                            ERROR: Invalid commit name:
-                            \tIt should match {REGEX_MESSAGE}
-                            \tExample: feat(scope): #12 Add commit-msg hook
+    \033[91mERROR: Invalid commit name:
+    It should match \033[4m{REGEX_MESSAGE}\033[0m\033[91m
+    Example: \033[4mfeat(scope): #12 Add commit-msg hook\033[0m
                         """)
 
 
